@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  generation: 9
   labels:
     app: getcustomer
     app.kubernetes.io/component: getcustomer
