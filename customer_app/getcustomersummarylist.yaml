@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: getcustomersummarylist
+    app.kubernetes.io/component: getcustomersummarylist
+    app.kubernetes.io/instance: getcustomersummarylist
+  name: getcustomersummarylist
+  namespace: bankinter
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      deployment: getcustomersummarylist
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        deployment: getcustomersummarylist
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: mysql
+        image: quay.io/rhn_support_algonzal/getcustomersummarylist:1.0
+        imagePullPolicy: IfNotPresent
+        name: getcustomersummarylist
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
