@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: mvccustomer
+    app.kubernetes.io/component: mvccustomer
+    app.kubernetes.io/instance: mvccustomer
+  name: mvccustomer
+spec:
+  port:
+    targetPort: 5000-tcp
+  to:
+    kind: Service
+    name: mvccustomer
+    weight: 100
+  wildcardPolicy: None
+

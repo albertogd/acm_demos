@@ -2,17 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: getcustomer
-    app.kubernetes.io/component: getcustomer
-    app.kubernetes.io/instance: getcustomer
-  name: getcustomer
-  namespace: bankinter
+    app: getcustomersummarylist
+    app.kubernetes.io/component: getcustomersummarylist
+    app.kubernetes.io/instance: getcustomersummarylist
+  name: getcustomersummarylist
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      deployment: getcustomer
+      deployment: getcustomersummarylist
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -21,15 +20,15 @@ spec:
   template:
     metadata:
       labels:
-        deployment: getcustomer
+        deployment: getcustomersummarylist
     spec:
       containers:
       - envFrom:
         - secretRef:
             name: mysql
-        image: quay.io/rhn_support_algonzal/getcustomer:1.0
+        image: quay.io/rhn_support_algonzal/getcustomersummarylist:1.0
         imagePullPolicy: IfNotPresent
-        name: getcustomer
+        name: getcustomersummarylist
         ports:
         - containerPort: 8080
           protocol: TCP
