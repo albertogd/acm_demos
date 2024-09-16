@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: nodeapp
-        deployment: getcustomer
+        deployment: nodeapp
     spec:
       containers:
       - name: nodejs-demo
